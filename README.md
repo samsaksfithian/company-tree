@@ -1,68 +1,85 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Company Hierarchy Tree
 
-## Available Scripts
+## Background
 
-In the project directory, you can run:
+Most companies have a hierarchical structure: employees have managers and those managers have their own managers, etc, etc.
+This can be represented by a tree structure where child nodes report to their immediate parents.
 
-### `npm start`
+For example, if my company had the following employees:
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- MacKeever
+- Jeff
+- Andrew, reports to Jeff
+- Nicole, reports to Jeff
+- Kevin, reports to Andrew
+- Ivy, reports to Andrew
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+You could represent the hierarchy like so:
 
-### `npm test`
+- Mackeever
+- Jeff
+  - Andrew
+    - Kevin
+    - Ivy
+  - Nicole
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Task
 
-### `npm run build`
+Your task is to make an application to visualize a company's hierarchy.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+A user should be able to:
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+1. Add new employees
+   1. Input should accept Name and Reports To
+   2. Make sure to handle an empty Reports To. This should create a top-level employee (they report to no one)
+2. Remove an employee
+   1. If removed employee has any direct reports, they should now report to the removed employee's report. For instance, if I removed Andrew from the example above my new hierarchy would be:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Mackeever
+- Jeff
+  - Kevin
+  - Ivy
+  - Nicole
 
-### `npm run eject`
+If I removed Jeff it would become:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Mackeever
+- Kevin
+- Ivy
+- Nicole
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Bonus 1
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. Extend your Add Employee form to accept job title and email.
+2. Add a details view where a user can view name, reports to, job title, and email of selected employee
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Bonus 1.5
 
-## Learn More
+In the details view, show all employees that _report to_ the selected employee
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Bonus 2
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Allow users to edit an employee, including their name, job title, and email
 
-### Code Splitting
+### Bonus 3
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Persist your state in some kind of external database/cloud service.
 
-### Analyzing the Bundle Size
+## Some Things to Note
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+1. Think about the time complexity of assembling your tree. What is your N?
+2. Order doesn't matter, so
 
-### Making a Progressive Web App
+- Kevin
+- Ivy
+- Nicole
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Is the same as
 
-### Advanced Configuration
+- Nicole
+- Ivy
+- Kevin
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+3. Styling is not the most important part of this task, but make sure it looks professional and is usable. Think about principles of good design.
+   1. It's ok to use a simple bulleted list for your tree, but if you want to try to make something more stylized, go for it!
+4. Use Git! Track your changes and make sure you have at least one commit. For your code review I will pull the last commit from _before_ the deadline. So no cheating.
